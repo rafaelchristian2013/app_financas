@@ -1,0 +1,112 @@
+{% load static %}
+<!-- <div>
+  {% for transacao in transacoes %}
+    <h1>{{transacao.valor_transacao}}</h1>
+  {% endfor %}
+
+</div> -->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dev.finance$</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;1,100;1,300;1,700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <img src="{% static 'img/logo.svg' %}" alt="Logo Dev Finance">
+      
+      <section id="menu">
+        <span id="caixa">Caixa</span> 
+        <span id="objetivo">Objetivo</span> 
+        <span id="acao">Invest</span> 
+      </section>
+
+      <section id="mes">
+        <span id="voltar-mes"><</span>
+        <span>Mês</span>
+        <span id="avancar-mes">></span>
+      </section>
+    </header>
+
+    <main class="container">
+
+      <section id="balance">
+        <h2 class="sr-only">Balanço</h2>
+
+        <div class="card">
+          <h3>
+            <span>Entradas</span> 
+            <img src= "{% static 'img/income.svg' %}" alt="Imagem de entradas">
+          </h3>
+          <p id="incomeDisplay">R$ {{entradas|floatformat:2}}</p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span>Saídas</span> 
+            <img src= "{% static 'img/expense.svg' %}" alt="Imagem de entradas">
+          </h3>
+          <p id="expenseDisplay">R$ {{despesas|floatformat:2}}</p>
+          
+        </div>
+
+        <div class="card total">
+          <h3>
+            <span>Total</span> 
+            <img src= "{% static 'img/total.svg' %}" alt="Imagem de entradas">
+          </h3>
+          <p id="totalDisplay">R$ {{em_caixa|floatformat:2}}</p>
+        </div>
+
+      </section>
+
+      <section id="transaction">
+        <h2 class="sr-only">Transações</h2>
+
+      <div class="button new"> 
+        <ul>
+          <li><a href="{% url 'nova' %}" >+ Nova Transação</a></li>
+        </ul>
+      </div>
+
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for transacao in transacoes%}
+              <tr>
+                <td><a href="{% url 'transacao' transacao.id %}">{{transacao.nome_transacao}}</a></td>
+                <td>R$ {{transacao.valor_transacao|floatformat:2}}</td>
+                <td>{{transacao.data_transacao|date:'d/m/Y'}}</td>
+                <td>{{transacao.tipo_transacao}}</td>
+                <td><a href="{% url 'edita_transacao' transacao.id %}">Editar</a></td>
+                <td><a href="{% url 'deleta_transacao' transacao.id %}">Apagar</a></td>
+
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </main>
+    
+
+
+    <footer>
+      <p>dev.finance$</p>
+    </footer>
+  </body>
+</html>
