@@ -4,4 +4,4 @@ Desenvolvimento de uma aplicação de finanças utilizando Django.
 - Foi utilizado Django para construção do back-end e postgreSQL para armazenar as transações.
 
 Tecnologias Utilziadas: Python, Django, SQL, Psycopg2.
-Projeto se encntra atualmente em construção.
+Projeto se encontra atualmente em construção.
